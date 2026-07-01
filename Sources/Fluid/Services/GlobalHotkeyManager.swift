@@ -346,6 +346,8 @@ final class GlobalHotkeyManager: NSObject {
 
     func updatePrimaryShortcuts(_ newShortcuts: [HotkeyShortcut]) {
         self.primaryShortcuts = newShortcuts
+        // Drop stale modifier-only press/hold state so a removed shortcut can't keep firing.
+        self.resetModifierOnlyShortcutTracking()
         DebugLogger.shared.info("Updated transcription hotkeys", source: "GlobalHotkeyManager")
     }
 
